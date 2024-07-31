@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-# This script gets the top 500 proxies from all SpeedX proxy lists
+# This script gets the top 800 proxies from all SpeedX proxy lists
 make_file() {
     file_path=$1
 
@@ -13,7 +13,7 @@ make_file() {
 output=$1
 
 if [[ -z "$output" ]]; then
-    output="/home/dev/workshop/tools/proxies/speedx-proxies/proxy-list.txt"
+    output="./proxies.txt"
     make_file $output
 else
     make_file $output
@@ -24,7 +24,9 @@ proxy_urls[0]="https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/soc
 proxy_urls[1]="https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/socks4.txt"
 proxy_urls[2]="https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/http.txt"
 
+echo "[+] Fetching proxies..."
 for url in "${proxy_urls[@]}"
 do
-    curl -s "$url" | head -n 500 >> $output
+    curl -s "$url" | head -n 800 >> $output
 done
+echo "[+] Proxies writen to $output"
